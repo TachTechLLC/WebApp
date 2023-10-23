@@ -1,4 +1,5 @@
 from flask import Flask, request, Response
+import json
 import os
 
 TOKEN = os.environ["AUTHORIZATION_TOKEN"]
@@ -14,7 +15,7 @@ def get_users():
     auth_header = request.headers.get("Authorization")
     if auth_header != f"Bearer {TOKEN}":
         return Response(status=401)
-    return Response("[{'name': 'Armen Martirosyan', 'phone':'+19876543210'}]")
+    return Response(json.dumps([{'name': 'Armen Martirosyan', 'phone':'+19876543210'}]), mimetype="application/json")
 
 # A method that runs the application server.
 if __name__ == "__main__":
